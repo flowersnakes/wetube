@@ -4,6 +4,7 @@ import session from "express-session";
 import rootRouter from "./routers/rootRouter";
 import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
+import { localsMiddleware } from "./middlewares";
 
 const app = express();
 const logger = morgan("dev");
@@ -16,6 +17,14 @@ app.use(express.urlencoded({ extended: true })); //html에서  form을 사용하
 
 app.use(session({ secret: "Hello!", resave: true, saveUninitialized: true }));
 
+/* 모든 세션을 확인 할때 사용
+app.use((req, res, next) => {
+  req.sessionStore.all((error, sessions) => {
+    next();
+  });
+});
+*/
+app.use(localsMiddleware);
 app.use("/", rootRouter);
 app.use("/videos", videoRouter);
 app.use("/users", userRouter);
