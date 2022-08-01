@@ -18,11 +18,16 @@ app.use(express.urlencoded({ extended: true })); //html에서  form을 사용하
 
 app.use(
   session({
-    secret: "Hello!",
+    secret: process.env.COOKIE_SECRET,
     resave: false,
     saveUninitialized: false,
+    /* 만료 시간 지정
+    cookie: {
+      maxAge: 20000,
+    },
+    */
     store: MongoStore.create({
-      mongoUrl: "mongodb://127.0.0.1:27017/wetube",
+      mongoUrl: process.env.DB_URL,
     }),
   })
 );

@@ -1,3 +1,8 @@
+import "dotenv/config";
+
+const sss = String(process.env.DB_URL);
+console.log(sss);
+
 import "./db";
 import "./models/Video";
 import "./models/User";
