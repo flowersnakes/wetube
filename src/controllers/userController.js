@@ -2,6 +2,7 @@ import User from "../models/User";
 import fetch from "cross-fetch";
 import bcrypt from "bcrypt";
 import session from "express-session";
+import { render } from "pug";
 
 export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
@@ -187,5 +188,43 @@ export const postEdit = async (req, res) => {
   */
   req.session.user = updatedUser;
   return res.redirect("/users/edit");
+};
+
+export const getChangePassword = (req, res) => {
+  //console.log(req.session.user._id);
+  if (req.session.user.socialOnly === true) {
+    return res.redirect("/");
+  }
+  return res.render("users/change-password", { pageTitle: "Change Password" });
+};
+export const postChangePassword = async (req, res) => {
+  const {
+    session: {
+      user: { _id },
+    },
+    body: { oldPassword, newPassword, newPasswordConfirmation },
+  } = req;
+  const user = await User.findById(_id);
+  const ok = await bcrypt.compare(oldPassword, user.password);
+  if (!ok) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "the current password is incorrect",
+    });
+  }
+  if (newPassword !== newPasswordConfirmation) {
+    return res.status(400).render("users/change-password", {
+      pageTitle: "Change Password",
+      errorMessage: "the password does not match th confirmation",
+    });
+  }
+
+  //console.log("Old password", user.password);
+  user.password = newPassword;
+  //console.log("New unhashed pw", user.password);
+  await user.save();
+  //req.session.user.password = user.password;
+  //console.log("new pw", user.password);
+  return res.redirect("/users/logout");
 };
 export const see = (req, res) => res.send("See User");
