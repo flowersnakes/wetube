@@ -162,6 +162,11 @@ header .header__btn {
   padding: 5px 10px;
   border-radius: 5px;
 }
+header .header__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
 
 footer {
   margin-top: 50px;
@@ -217,6 +222,8 @@ footer {
 form {
   max-width: 420px;
   margin: 0 auto;
+}
+form:not(.search__form) {
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5);
   border-radius: 10px;
@@ -274,7 +281,7 @@ input[type=submit],
   background-color: black;
   margin-bottom: 5px;
   font-size: 16px;
-  color: white;
+  color: wrehite;
   width: 90%;
 }
 .search__form button {
@@ -282,7 +289,7 @@ input[type=submit],
 }
 .search__form button {
   position: absolute;
-  right: 15px;
+  right: 40px;
   font-size: 18px;
   background-color: rgba(0, 0, 0, 0);
   text-align: center;
