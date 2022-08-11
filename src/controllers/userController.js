@@ -7,7 +7,7 @@ import { render } from "pug";
 
 export const getJoin = (req, res) => res.render("Join", { pageTitle: "Join" });
 export const postJoin = async (req, res) => {
-  console.log(req.body);
+  //console.log(req.body);
   const { name, username, email, password, password2, location } = req.body;
   const exists = await User.exists({ $or: [{ username }, { email }] });
   const pageTitle = "Join";
@@ -75,7 +75,7 @@ export const startGithubLogin = (req, res) => {
   };
   const params = new URLSearchParams(config).toString();
   const finalUrl = `${baseUrl}?${params}`;
-  console.log(finalUrl);
+  //console.log(finalUrl);
   return res.redirect(finalUrl);
 };
 
@@ -109,7 +109,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(userData);
+    //console.log(userData);
     const emailData = await (
       await fetch(`${apiUrl}/user/emails`, {
         headers: {
@@ -117,7 +117,7 @@ export const finishGithubLogin = async (req, res) => {
         },
       })
     ).json();
-    console.log(emailData);
+    //console.log(emailData);
     const emailObj = emailData.find(
       (emailObj) => emailObj.primary === true && emailObj.verified === true
     );
@@ -126,7 +126,7 @@ export const finishGithubLogin = async (req, res) => {
     }
 
     let user = await User.findOne({ email: emailObj.email });
-    console.log(user);
+    //console.log(user);
     if (!user) {
       user = await User.create({
         avatarUrl: userData.avatar_url,
