@@ -29,10 +29,11 @@ input[type="submit"],
 .social__btn {
   border-radius: 5px;
   padding: 12px 20px;
-  background-color: white;
-  color: rgba($color: $red, $alpha: 0.9);
-  font-weight: bold;
-  text-align: center;
+  background-color: white !important;
+  color: rgba($color: $red, $alpha: 0.9) !important;
+  font-weight: bold !important;
+  text-align: center !important;
   cursor: pointer;
   display: block;
+  border: none;
 }
