@@ -1,5 +1,4 @@
 import { createFFmpeg, fetchFile } from "@ffmpeg/ffmpeg";
-import { async } from "regenerator-runtime";
 
 const actionBtn = document.getElementById("actionBtn");
 const video = document.getElementById("preview");
@@ -37,7 +36,7 @@ const handleDownload = async () => {
   await ffmpeg.run("-i", files.input, "-r", "60", files.output);
 
   await ffmpeg.run(
-    "-1",
+    "-i",
     files.input,
     "-ss",
     "00:00:01",
@@ -46,10 +45,10 @@ const handleDownload = async () => {
     files.thumb
   );
 
-  const mp3File = ffmpeg.FS("readFile", files.output);
+  const mp4File = ffmpeg.FS("readFile", files.output);
   const thumbFile = ffmpeg.FS("readFile", files.thumb);
 
-  const mp4Blob = new Blob([mp4file.buffer], { type: "video/mp4" });
+  const mp4Blob = new Blob([mp4File.buffer], { type: "video/mp4" });
   const htumbBlob = new Blob([thumbFile.buffer], { type: "image/jpg" });
 
   const mp4Url = URL.createObjectURL(mp4Blob);

@@ -33,6 +33,12 @@ app.use(
   })
 );
 
+app.use((req, res, next) => {
+  res.header("Cross-Origin-Embedder-Policy", "require-corp");
+  res.header("Cross-Origin-Opener-Policy", "same-origin");
+  next();
+});
+
 /* 모든 세션을 확인 할때 사용
 app.use((req, res, next) => {
   req.sessionStore.all((error, sessions) => {
