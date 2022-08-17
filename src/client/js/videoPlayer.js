@@ -111,7 +111,7 @@ const handleKeydown = (event) => {
   const { code } = event;
 
   if (code === "Space") {
-    console.log(code);
+    //console.log(code);
     handlePlayClick();
   }
 };

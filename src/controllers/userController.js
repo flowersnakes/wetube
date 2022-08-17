@@ -238,7 +238,7 @@ export const see = async (req, res) => {
     path: "videos",
     populate: { path: "owner", model: "User" },
   });
-  console.log(user);
+  //console.log(user);
   if (!user) {
     return res.status(404).render("404", { pageTitle: "User not found." });
   }
