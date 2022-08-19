@@ -17,6 +17,7 @@ app.set("views", process.cwd() + "/src/views");
 
 app.use(logger);
 app.use(express.urlencoded({ extended: true })); //html에서  form을 사용하기 위해 추가
+app.use(express.json()); //POST 내용에 TEXt가 있는경우 해석
 
 app.use(
   session({
