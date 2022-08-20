@@ -1,3 +1,4 @@
+import "regenerator-runtime";
 import "dotenv/config";
 
 const sss = String(process.env.DB_URL);
