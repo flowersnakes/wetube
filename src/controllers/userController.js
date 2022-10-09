@@ -1,7 +1,7 @@
 import User from "../models/User";
 import Video from "../models/Video";
 import fetch from "cross-fetch";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 import session from "express-session";
 import { render } from "pug";
 
